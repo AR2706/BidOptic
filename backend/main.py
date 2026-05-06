@@ -79,12 +79,10 @@ async def upload_tender(file: UploadFile = File(...), criteria: str = Form("")):
             status_type = "fail"
             evidence_list = [f"No textual match found for '{rule}' in the tender."]
 
-        # Step B: AI Semantic Verification (Optional enhancement)
-        # We wrap this in a try-block so the app works even if the API is slow
+        # Step B: AI Semantic Verification
         try:
             prompt = f"<|user|>\nAnalyze this text: {full_text[:2000]}\nRule: {rule}\nDoes it pass? Return ONLY JSON: {{\"status\": \"pass\", \"reason\": \"...\"}}<|end|>\n<|assistant|>"
             ai_out = query_hf({"inputs": prompt})
-            # Attempt to parse AI response text
             ai_text = ai_out[0]['generated_text'] if isinstance(ai_out, list) else str(ai_out)
             match = re.search(r'\{.*\}', ai_text, re.DOTALL)
             ai_data = json.loads(match.group()) if match else {}
