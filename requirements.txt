@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+pandas
+scikit-learn
+requests
+pydantic
+python-multipart
+python-dotenv
+pymupdf
