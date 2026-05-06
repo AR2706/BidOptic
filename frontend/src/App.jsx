@@ -30,7 +30,7 @@ function App() {
     setStatus("AI Engine: Auditing Compliance...");
     
     try {
-      const response = await axios.post("http://localhost:8000/upload-tender/", formData);
+      const response = await axios.post("https://bidoptic-backend.onrender.com/upload-tender/", formData);
       setEvaluations(response.data.results);
       setStatus("Analysis Complete");
     } catch (error) {
