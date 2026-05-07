@@ -101,3 +101,7 @@ async def upload_tender(file: UploadFile = File(...), criteria: str = Form("")):
         })
 
     return {"status": "success", "results": results}
+
+@app.get("/")
+def home():
+    return {"message": "BidOptic AI API is running!"}
